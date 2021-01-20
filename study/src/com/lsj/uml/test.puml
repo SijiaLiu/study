@@ -1,0 +1,13 @@
+@startuml
+[*] -> init: 初始化
+
+state init : 初始化 status = 0
+state failed : 退还失败 status = 2
+state success : 退还成功 status = 1
+
+init --> failed : 退还失败/退还接口无响应
+init --> success : 退还成功
+failed --> success : 重试
+
+success --> [*]
+@enduml

@@ -1,8 +1,5 @@
 package com.lsj.dfs;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class Land {
 
     /**
@@ -43,39 +40,44 @@ public class Land {
         return 1;
     }
 
-    public int numLandsBfs(char[][] grid) {
-        if (grid.length == 0) {
-            return 0;
-        }
-        int ans = 0;
+    /**
+     * 给定一个包含了一些 0 和 1 的非空二维数组 grid 。
+     *
+     * 一个 岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在水平或者竖直方向上相邻。
+     * 你可以假设 grid 的四个边缘都被 0（代表水）包围着。
+     *
+     * 找到给定的二维数组中最大的岛屿面积。(如果没有岛屿，则返回面积为 0 。)
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/max-area-of-island
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * @param grid
+     * @return
+     */
+    public int maxAreaOfIsland(int[][] grid) {
         int row = grid.length;
-        // 必须使用列
         int col = grid[0].length;
-        int[][] dir = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-        Queue<Integer> queue = new LinkedList<>();
+        int res = 0;
         for (int i = 0; i < row; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == '1') {
-                    ++ans;
-                    grid[i][j] = '0';
-                    int q = i * col + j;
-                    queue.add(q);
-                    while (!queue.isEmpty()) {
-                        Integer top = queue.remove();
-                        int x = top / col;
-                        int y = top % col;
-                        for (int[] ints : dir) {
-                            int newRow = x + ints[0];
-                            int newCol = y + ints[1];
-                            if (newRow >= 0 && newRow < row && newCol >= 0 && newCol < col && grid[newRow][newCol] == '1') {
-                                queue.add(newRow * col + newCol);
-                                grid[newRow][newCol] = '0';
-                            }
-                        }
-                    }
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    res = Math.max(res, dfs(grid, i, j, row, col));
                 }
             }
         }
-        return ans;
+        return res;
+    }
+
+    private int dfs(int[][] grid, int i, int j, int row, int col) {
+        if (i < 0 || i >= row || j < 0 || j >= col || grid[i][j] == 0) {
+            return 0;
+        }
+        int num = 1;
+        grid[i][j] = 0;
+        int[][] dir = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        for (int[] d : dir) {
+            num += dfs(grid, i + d[0], j + d[1], row, col);
+        }
+        return num;
     }
 }

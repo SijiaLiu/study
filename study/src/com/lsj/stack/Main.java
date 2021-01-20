@@ -1,15 +1,17 @@
 package com.lsj.stack;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
-        Stack stack = new Stack(10);
+        MyStack myStack = new MyStack(10);
 
-        System.out.println(stack.isEmpty());
-        stack.push("liu");
-        stack.push("si");
-        stack.push("jia");
-        System.out.println(stack.pop());
+        System.out.println(myStack.isEmpty());
+        myStack.push("liu");
+        myStack.push("si");
+        myStack.push("jia");
+        System.out.println(myStack.pop());
 
         DStack dStack = new DStack(5);
         dStack.push("liu", 1);
@@ -23,5 +25,13 @@ public class Main {
 
         ValidBrackets validBrackets = new ValidBrackets();
         System.out.println(validBrackets.isValid("()"));
+
+
+        DailyTemperatures dailyTemperatures = new DailyTemperatures();
+        System.out.println(Arrays.toString(dailyTemperatures.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73})));
+        System.out.println(Arrays.toString(dailyTemperatures.dailyTemperatures2(new int[]{73, 74, 75, 71, 69, 72, 76, 73})));
+
+        EvalRPN evalRPN = new EvalRPN();
+        System.out.println(evalRPN.evalRPN(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}));
     }
 }

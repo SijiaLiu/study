@@ -1,0 +1,33 @@
+@startuml
+[*] -> init: 初始化
+
+state  init: 初始化 status = 0
+state  lock: 锁定基金 status = 1
+state  unLock: 解锁基金 status = 2
+state  lockFailed: 锁定基金失败 status = -1
+state  unknown: 锁定状态未知 status = -2
+state  writeOff: 核销基金 status = -3
+
+init --> lockFailed : 锁定基金失败
+init --> unknown : 锁定基金接口无响应
+init --> lock : 锁定基金成功
+init --> unLock : 定时任务排查无订单的记录
+
+lock --> paySuccess : 用户支付成功
+lock --> cancelOrder : 用户取消订单
+lock --> createOrderFailed : 创建订单失败
+
+unknown --> lockSuccess : 锁定基金接口无响应，但锁定基金成功
+unknown --> lockFailedBefore : 锁定基金接口无响应，且锁定基金失败
+
+lockSuccess --> unLock : 解锁基金
+lockFailedBefore --> lockFailed : 无需解锁
+
+paySuccess --> writeOff : 核销基金
+cancelOrder --> unLock : 解锁基金
+createOrderFailed --> unLock : 解锁基金
+
+lockFailed --> [*]
+unLock --> [*]
+writeOff --> [*]
+@enduml

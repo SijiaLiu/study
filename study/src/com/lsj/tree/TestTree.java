@@ -2,7 +2,7 @@ package com.lsj.tree;
 /**
  * class_name: TestTree
  * package: algorithm.tree
- * describe: TODO
+ * describe:
  * @author liusijia
  * @Date 2019/1/31
 **/
@@ -33,7 +33,9 @@ public class TestTree {
         for (int i = 0; i < objs.length; i++) {
             BinaryTree.createBinaryTree(treeRoot, (Integer) objs[i]);
         }
-        System.out.println(BinaryTree.getTreeHeight(treeRoot.getTreeNode()));
+        System.out.println("树的深度 分治+DFS: " + BinaryTree.getTreeHeight(treeRoot.getTreeNode()));
+        System.out.println("树的深度 BFS: " + BinaryTree.getTreeHeightBfs(treeRoot.getTreeNode()));
+        System.out.println("树的最小深度 BFS: " + BinaryTree.getMinTreeHeightBfs(treeRoot.getTreeNode()));
         BinaryTree.preOrderStack(treeRoot.getTreeNode());
         System.out.println("前序" + BinaryTree.getTreeList());
         BinaryTree.inOrderStack(treeRoot.getTreeNode());
@@ -54,6 +56,15 @@ public class TestTree {
         BinaryTree.deleteTreeNode(treeRoot.getTreeNode(), 20);
         BinaryTree.levelOrderTraversal(treeRoot.getTreeNode());
         System.out.println("层序" + BinaryTree.getTreeList());
+
+        // 判断是否是二叉搜索树
+        System.out.println("是否是二叉搜索树：" + BinaryTree.isBinaryTree(treeRoot.getTreeNode(), null, null));
+
+        // 层序遍历
+        System.out.println("层序遍历BFS : " + BinaryTree.levelOrderBfs(treeRoot.getTreeNode()));
+        System.out.println("层序遍DFS : " + BinaryTree.levelOrderDfs(treeRoot.getTreeNode()));
+        // 蛇形输出二叉树
+        System.out.println("蛇形输出二叉树 : " + BinaryTree.serpentineOutputBinaryTree(treeRoot.getTreeNode()));
 
     }
 }

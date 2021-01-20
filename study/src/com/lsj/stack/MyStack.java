@@ -3,13 +3,13 @@ package com.lsj.stack;
 /**
  * 数组实现的栈
  */
-public class Stack {
+public class MyStack {
 
     public int top = -1;
 
     public Object[] elementData;
 
-    public Stack(int size) {
+    public MyStack(int size) {
         elementData = new Object[size];
     }
 

@@ -49,7 +49,7 @@ public class Simple {
     }
 
     /**
-     * 在线处理，O(N)
+     * 最大子列和 在线处理，O(N)
      *
      * @param list
      * @param left

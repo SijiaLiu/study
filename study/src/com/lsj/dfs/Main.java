@@ -2,9 +2,19 @@ package com.lsj.dfs;
 
 public class Main {
     public static void main(String[] args) {
-        char[][] grid = new char[][]{{'1'},{'0'},{'1'},{'1'},{'0'},{'1'},{'1'}};
+        int[][] grid = new int[][]{
+                {1,1,0,0,0},
+                {1,1,0,0,0},
+                {0,0,0,1,1},
+                {0,0,0,1,1}};
         Land land = new Land();
-        char[][] grid1 = new char[][]{{'1','0','1','1','0','1','1'}};
-        System.out.println(land.numLandsBfs(grid1));
+        //System.out.println(land.numLands(grid));
+        System.out.println("岛屿最大面积：" + land.maxAreaOfIsland(grid));
+
+
+        FindTargetSumWays findTargetSumWays = new FindTargetSumWays();
+        System.out.println(findTargetSumWays.findTargetSumWays(new int[]{1, 1, 1, 1, 1}, 3));
     }
+
+
 }

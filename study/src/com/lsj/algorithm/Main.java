@@ -8,5 +8,11 @@ public class Main {
         System.out.println(divideAndConquer);
         int maxSum = simple.maxSubSum(list, 0, list.length - 1);
         System.out.println(maxSum);
+
+        TwoSum twoSum = new TwoSum();
+        System.out.println(twoSum.threeSums(new int[] {-1,0,1,2,-1,-4}));
+
+        Pow pow = new Pow();
+        System.out.println(pow.pow(4, -2));
     }
 }

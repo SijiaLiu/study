@@ -64,7 +64,12 @@ public class TestTree {
         System.out.println("层序遍历BFS : " + BinaryTree.levelOrderBfs(treeRoot.getTreeNode()));
         System.out.println("层序遍DFS : " + BinaryTree.levelOrderDfs(treeRoot.getTreeNode()));
         // 蛇形输出二叉树
-        System.out.println("蛇形输出二叉树 : " + BinaryTree.serpentineOutputBinaryTree(treeRoot.getTreeNode()));
+        TreeNode t = new TreeNode(1);
+        TreeNode t1 = new TreeNode(2);
+        t.right = t1;
+        System.out.println("蛇形输出二叉树 : " + BinaryTree.serpentineOutputBinaryTree(t));
+
+        System.out.println(BinaryTree.verifyPostorder(new int[]{4, 8, 6, 12, 16, 14, 10}));
 
     }
 }

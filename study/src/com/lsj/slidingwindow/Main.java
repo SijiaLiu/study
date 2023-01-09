@@ -11,5 +11,10 @@ public class Main {
 
         System.out.println(minWindowSub.checkInclusion("trinitrophenylmethylnitramine",
                 "dinitrophenylhydrazinetrinitrophenylmethylnitramine"));
+
+        int[] ints = {1, 1, 2};
+        minWindowSub.removeDuplicates(ints);
+        System.out.println(ints);
+        System.out.println(minWindowSub.lengthOfLongestSubstringTwoDistinct("eceba"));
     }
 }

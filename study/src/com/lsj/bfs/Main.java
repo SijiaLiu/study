@@ -17,6 +17,8 @@ public class Main {
 
         Land land = new Land();
         char[][] grid1 = new char[][]{{'1'}, {'1'}};
+        System.out.println("~~~~~~岛屿数量~~~~~");
+        System.out.println(land.numLandsBfs1(grid1));
         System.out.println(land.numLandsBfs(grid1));
 
         NumSquares numSquares = new NumSquares();

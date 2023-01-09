@@ -9,6 +9,7 @@ public class Main {
 
         MaxProduct maxProduct = new MaxProduct();
         System.out.println(maxProduct.maxProduct(new int[]{2, 3, -2, 4}));
+        System.out.println(maxProduct.canJump(new int[]{3, 2, 1, 0, 4}));
 
         Stock stock = new Stock();
         System.out.println("买卖股票 只能买一次，最大利润：" + stock.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
@@ -37,10 +38,17 @@ public class Main {
         System.out.println("最长且连续的的递增序列长度 : " + longestCommonSubsequence.findLengthOfLCIS(new int[]{2,2,2,2}));
         System.out.println("最长回文子序列的长度 : " + longestCommonSubsequence.longestPalindromeSubseq("bbabc"));
 
+        TranslateNum translateNum = new TranslateNum();
+        System.out.println("翻译数字的最多种方法：" + translateNum.translateNum(506));
+
         LongestPalindrome longestPalindrome = new LongestPalindrome();
         System.out.println("最长回文串 : " + longestPalindrome.longestPalindrome("abbad"));
 
         longestPalindrome.traverseNoCopy(new int[][]{{1,2,3}, {4,5,6}, {7,8,9}});
+
+
+        int lengthOfLongestSubstring = longestPalindrome.lengthOfLongestSubstring(" ");
+        System.out.println("最长无重复子串的长度 : " + lengthOfLongestSubstring);
 
         Kmp kmp = new Kmp("abc");
         System.out.println("KMP search : " + kmp.search("dsjjafbcgfabfdabcjk", "abc"));

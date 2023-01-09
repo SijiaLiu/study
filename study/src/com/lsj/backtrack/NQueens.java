@@ -6,28 +6,37 @@ import java.util.List;
 
 public class NQueens {
 
+    private static char[][] board;
+
     public static void main(String[] args) {
-        List<List<String>> lists = solveNQueens(5);
-        System.out.println(lists);
+        List<List<String>> lists = solveNQueens(8);
+        print(lists);
+    }
+
+    private static void print(List<List<String>> lists) {
+        for (List<String> list : lists) {
+            list.forEach(System.out::println);
+            System.out.println("~~~~~~~~~~~~~");
+        }
     }
 
     private static List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
-        char[][] board = new char[n][n];
-        initBoard(board);
-        helper(res, board, 0);
+        board = new char[n][n];
+        initBoard();
+        helper(res, 0);
         return res;
     }
 
     // 初始化board
-    private static void initBoard(char[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            Arrays.fill(board[i], '.');
+    private static void initBoard() {
+        for (char[] chars : board) {
+            Arrays.fill(chars, '.');
         }
     }
 
     // 判断当前位置是否合法
-    private static boolean isValid(char[][] board, int row, int col) {
+    private static boolean isValid(int row, int col) {
         // 当前列是否合法
         for (int i = row - 1; i >= 0; i--) {
             if (board[i][col] == 'Q') {
@@ -64,7 +73,7 @@ public class NQueens {
 
     // 从第一行开始 逐行填充 dfs
     // 行数在每次dfs的时候都会加一，所以用列数做循环条件
-    private static void helper(List<List<String>> res, char[][] board, int row){
+    private static void helper(List<List<String>> res, int row){
         // 访问到最后一行的时候
         if (row == board.length) {
             res.add(generateBoard(board));
@@ -72,9 +81,9 @@ public class NQueens {
         }
         // 第一列开始尝试
         for (int col = 0; col < board.length; col++) {
-            if (isValid(board, row, col)) {
+            if (isValid(row, col)) {
                 board[row][col] = 'Q';
-                helper(res, board, row + 1);
+                helper(res, row + 1);
                 // unChoose 回溯 还原
                 board[row][col] = '.';
             }

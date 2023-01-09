@@ -10,13 +10,15 @@ package com.lsj.tree;
 
 public class TreeNode {
 
-    private TreeNode left;
+    public TreeNode left;
 
-    private TreeNode right;
+    public TreeNode right;
 
-    private int val;
+    public int val;
 
     private int visit;
+
+    public TreeNode next;
 
     public TreeNode() {
 
@@ -57,5 +59,13 @@ public class TreeNode {
 
     public void setVal(int val) {
         this.val = val;
+    }
+
+    public TreeNode getNext() {
+        return next;
+    }
+
+    public void setNext(TreeNode next) {
+        this.next = next;
     }
 }

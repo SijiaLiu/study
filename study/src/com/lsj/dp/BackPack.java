@@ -114,9 +114,7 @@ public class BackPack {
         for (int i = 0; i <= nums.length; i++) {
             dp[i][0] = true;
         }
-        for (int i = 0; i <= target; i++) {
-            dp[0][i] = false;
-        }
+
         for (int i = 1; i <= length; i++) {
             for (int j = target; j >= nums[i - 1]; j--) {
                 // 前i-1个数字中如果能凑成目标值，则前n(n>i-1)值肯定可以凑成目标值
@@ -125,6 +123,46 @@ public class BackPack {
             }
         }
         return dp[length][target];
+    }
+
+    /**
+     * 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
+     * @param nums
+     * @return
+     */
+    public boolean canPartition(int[] nums) {
+        if (nums == null) {
+            return false;
+        }
+        int length = nums.length;
+        if (length % 2 != 0) {
+            return false;
+        }
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        sum = sum / 2;
+
+        // dp[i][j] 表示对于 第 i 件物品 放入j容量的背包 是否刚好能装满
+        boolean[][] dp = new boolean[length + 1][sum + 1];
+        // base case 背包容量为0 一直不放就能行
+        for (int i = 0; i <= length; i++) {
+            dp[i][0] = true;
+        }
+        for (int i = 1; i <= length; i++) {
+            for (int j = 1; j <= sum; j++) {
+                if (j < nums[i - 1]) {
+                    // 背包容量小 装不进去，只能不装
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    // 装或者不装
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
+                }
+            }
+        }
+
+        return dp[length][sum];
     }
 
     /**

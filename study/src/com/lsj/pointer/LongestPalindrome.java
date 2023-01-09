@@ -1,5 +1,7 @@
 package com.lsj.pointer;
 
+import java.util.Arrays;
+
 public class LongestPalindrome {
 
     /**
@@ -23,37 +25,60 @@ public class LongestPalindrome {
      * @return
      */
     public String longestPalindrome(String s) {
-        if (s == null || s.length() == 0) {
-            return null;
-        }
-        int start = 0;
-        int end = 0;
+        String res = "";
         for (int i = 0; i < s.length(); i++) {
-            int len = Math.max(reverse(s, i, i), reverse(s, i, i + 1));
-            if (len > end - start) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
+            // 回文串长度 是 奇数 或者 偶数
+            String s1 = longestPalindrome(s, i, i);
+            String s2 = longestPalindrome(s, i, i + 1);
+            res = res.length() > s1.length() ? res : s1;
+            res = res.length() > s2.length() ? res : s2;
+        }
+        return res;
+    }
+
+    private String longestPalindrome(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        int v = (int) (1 % (Math.pow(10, 3) + 1));
+        System.out.println(Math.pow(10, 3) + 1);
+        return s.substring(left + 1, right);
+    }
+
+    public String reverseWords(String s) {
+        String cur = reverse(s);
+        StringBuilder sb = new StringBuilder();
+        int left = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (cur.charAt(i) == ' ') {
+                sb.append(reverse(cur.substring(left, i)));
+                sb.append(' ');
+                left = i + 1;
+            }
+            if (i == s.length() - 1) {
+                sb.append(reverse(cur.substring(left, i + 1)));
             }
         }
-        return s.substring(start, end + 1);
+        return sb.toString();
     }
 
-    /**
-     * 选取任意位置作为回文串的中心，
-     * @param s 目标字符串
-     * @param l 左边界
-     * @param r 右边界
-     * @return 回文串的长度 肯定是偶数
-     */
-    private int reverse(String s, int l, int r) {
-        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
-            l--;
-            r++;
+    private String reverse(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        int j = chars.length - 1;
+        while (i < j) {
+            char tmp = s.charAt(i);
+            chars[i] = chars[j];
+            chars[j] = tmp;
+            i++;
+            j--;
         }
-        return r - l - 1;
+        StringBuilder sb = new StringBuilder();
+        for (int k = 0; k < chars.length; k++) {
+            sb.append(chars[k]);
+        }
+        return sb.toString();
     }
 
-//    public boolean isPalindrome(int x) {
-//
-//    }
 }

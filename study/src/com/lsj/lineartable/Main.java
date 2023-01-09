@@ -12,6 +12,11 @@ public class Main {
 
         Link link = new Link();
 
+        ListNodeOperation listNodeOperation = new ListNodeOperation();
+        listNodeOperation.rotateRight(listNode1, 1);
+        listNodeOperation.reversePrint(listNode1);
+
+
         System.out.println("--------findByValue--------");
         int i = link.findByValue(listNode1, 6);
         System.out.println(i);
@@ -32,7 +37,7 @@ public class Main {
         link.outNode(listNode);
 
         System.out.println("-------reverseListNodeIterate--------");
-        ListNodeOperation listNodeOperation = new ListNodeOperation();
+        //ListNodeOperation listNodeOperation = new ListNodeOperation();
         ListNode listNode5 = listNodeOperation.reverseListNodeIterate(listNode1);
         link.outNode(listNode5);
 
@@ -49,5 +54,43 @@ public class Main {
         link.outNode(listNode8);
 
         listNodeOperation.mergeKNode(new ListNode[]{});
+
+        System.out.println("-------reorderList--------");
+        listNodeOperation.reorderList(listNode7);
+        link.outNode(listNode7);
+
+        System.out.println("-------orderListNode--------");
+        ListNode listNode9 = listNodeOperation.orderListNode(listNode7);
+        link.outNode(listNode9);
+
+        ListNode l1 = new ListNode(2);
+        ListNode l2 = new ListNode(4);
+        l1.next = l2;
+        ListNode l3 = new ListNode(3);
+        l2.next = l3;
+
+        ListNode l4 = new ListNode(5);
+        ListNode l5 = new ListNode(6);
+        l4.next = l5;
+        ListNode l6 = new ListNode(4);
+        l5.next = l6;
+
+        ListNode listNode10 = listNodeOperation.addTwoNumbers(l1, l2);
+
+        listNodeOperation.partition(new int[]{8, 2, 9, 10, 7, 12}, 0, 5);
+
+        listNodeOperation.nextPermutation(new int[]{1, 3, 2});
+        ListNodeOperation.LRUCache lruCache = new ListNodeOperation.LRUCache(2);
+        lruCache.put(1, 1);
+        lruCache.put(2, 3);
+        lruCache.put(4, 2);
+        System.out.println(lruCache.get(1));
+
+        listNodeOperation.searchMatrix(new int[][]{
+                {1,4,7,11,15},
+                {2,5,8,12,19},
+                {3,6,9,16,22},
+                {10,13,14,17,24},
+                {18,21,23,26,30}}, 5);
     }
 }

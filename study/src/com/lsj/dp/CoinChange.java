@@ -1,5 +1,7 @@
 package com.lsj.dp;
 
+import java.util.Arrays;
+
 public class CoinChange {
 
 
@@ -57,6 +59,48 @@ public class CoinChange {
                 dp[x] += dp[x - coin];
             }
         }
+        return dp[amount];
+    }
+
+
+    int[] dp;
+    public int coinChange(int[] coins, int amount) {
+        if (coins == null || amount == 0) {
+            return 0;
+        }
+        dp = new int[amount + 1];
+        Arrays.fill(dp, -666);
+        return coin(coins, amount);
+    }
+
+    /**
+     * 凑出目标金额 需要的最少硬币个数
+     *
+     * @param coins
+     * @param amount
+     * @return
+     */
+    private int coin(int[] coins, int amount) {
+        if (amount == 0) {
+            return 0;
+        }
+        if (amount < 0) {
+            return -1;
+        }
+        if (dp[amount] != -666) {
+            return dp[amount];
+        }
+        int min = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            // 子问题的最优解
+            int num = coin(coins, amount - coin);
+            if (num == -1) {
+                continue;
+            }
+            // 子问题的最优解 + 1 即是当前问题的解
+            min = Math.min(min, 1 + num);
+        }
+        dp[amount] = min == Integer.MAX_VALUE ? -1 : min;
         return dp[amount];
     }
 }
